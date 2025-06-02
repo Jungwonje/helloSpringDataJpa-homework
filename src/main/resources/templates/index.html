@@ -9,7 +9,10 @@
 <body>
 <div class="container">
     <h1 class="mt-5">Product List</h1>
-    <a class="btn btn-primary mb-3" th:href="@{/products/new}">Create New Product</a>
+    <!-- 관리자(ROLE_ADMIN)만 'Create New Product' 버튼 보임 -->
+    <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <a class="btn btn-primary mb-3" th:href="@{/products/new}">Create New Product</a>
+    </th:block>
 
     <table class="table table-bordered">
         <thead>
@@ -30,8 +33,11 @@
             <td th:text="${product.madeIn}">Made in</td>
             <td th:text="${product.price}">Price</td>
             <td>
-                <a class="btn btn-primary btn-sm" th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
-                <a class="btn btn-danger btn-sm" th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
+                <!-- 관리자(ROLE_ADMIN)만 Edit/Delete 버튼 보임 -->
+                <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a class="btn btn-primary btn-sm" th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
+                </th:block>
             </td>
         </tr>
         </tbody>

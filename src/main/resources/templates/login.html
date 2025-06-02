@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>로그인</title>
+</head>
+<body>
+<h2>로그인</h2>
+<form th:action="@{/login}" method="post">
+    <input type="email" name="username" placeholder="이메일" required />
+    <input type="password" name="password" placeholder="비밀번호" required />
+    <button type="submit">로그인</button>
+</form>
+<!-- Spring Security 표준 파라미터로 에러/로그아웃 메시지 처리 -->
+<p th:if="${param.error}" style="color:red;">이메일 또는 비밀번호가 올바르지 않습니다.</p>
+<p th:if="${param.logout}" style="color:green;">로그아웃되었습니다.</p>
+<a th:href="@{/signup}">회원가입</a>
+</body>
+</html>
