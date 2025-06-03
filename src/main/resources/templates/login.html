@@ -1,17 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:insert="~{common :: commonHead}">
     <title>로그인</title>
+    <style>
+        body {
+            background-color: #f5f6fa;
+        }
+        .card {
+            margin-top: 80px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+    </style>
 </head>
 <body>
-<h2>로그인</h2>
-<form th:action="@{/login}" method="post">
-    <input type="email" name="email" placeholder="이메일" required />
-    <input type="password" name="password" placeholder="비밀번호" required />
-    <button type="submit">로그인</button>
-</form>
-<p th:if="${param.error}" style="color:red;">이메일 또는 비밀번호가 올바르지 않습니다.</p>
-<p th:if="${param.logout}" style="color:green;">로그아웃되었습니다.</p>
-<a th:href="@{/signup}">회원가입</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card p-4">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">로그인</h2>
+                    <form th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="이메일" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">비밀번호</label>
+                            <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">로그인</button>
+                    </form>
+                    <div class="mt-3 text-center">
+                        <a th:href="@{/signup}">계정이 없으신가요? 회원가입</a>
+                    </div>
+                    <p th:if="${param.error}" class="text-danger text-center mt-3">이메일 또는 비밀번호가 올바르지 않습니다.</p>
+                    <p th:if="${param.logout}" class="text-success text-center mt-3">로그아웃되었습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:insert="~{common :: commonScript}"></div>
 </body>
 </html>
