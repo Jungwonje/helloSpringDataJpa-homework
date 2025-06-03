@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -19,8 +20,16 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-    @GetMapping({"", "/"}) // products 또는 products/ 둘 다 매핑
-    public String viewHomePage(Model model) {
+    @GetMapping({"", "/"})
+    public String viewHomePage(
+            Model model,
+            @RequestParam(value = "loginSuccess", required = false) String loginSuccess,
+            Principal principal
+    ) {
+        if ("true".equals(loginSuccess) && principal != null) {
+            String email = principal.getName();
+            model.addAttribute("loginSuccessMsg", email + "님 정상적으로 로그인되었습니다.");
+        }
         List<Product> listProducts = service.listAll();
         model.addAttribute("listProducts", listProducts);
         return "index";

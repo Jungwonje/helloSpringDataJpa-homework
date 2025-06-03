@@ -25,9 +25,9 @@ public class SecurityConfig {
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
+                        .defaultSuccessUrl("/products?loginSuccess=true", true)
                         .failureUrl("/login?error=true")
-                        .usernameParameter("email") // ★ 추가!
+                        .usernameParameter("email")
                         .permitAll()
                 )
                 .logout((logout) -> logout
