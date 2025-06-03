@@ -13,7 +13,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "product")
+@Table(name = "product",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "brand", "madeIn"}))
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
