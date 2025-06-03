@@ -3,7 +3,7 @@ INSERT IGNORE INTO role (name) VALUES ('ROLE_USER');
 INSERT IGNORE INTO role (name) VALUES ('ROLE_ADMIN');
 
 -- 사용자(User) 데이터 (비밀번호는 BCrypt로 암호화된 값)
-INSERT IGNORE INTO user (email, password) VALUES ('admin@example.com', '$2a$10$Dow1wEIH5n9E/5k9P3nPLuE6eZ2oo6kL3yBQb6uJf2lJ8nWw0fsbC');
+INSERT IGNORE INTO user (email, password) VALUES ('admin@example.com', '$2a$12$IBdi9Og7ZGP8Q.MpnI9hb.8JRVyws0bAQRYby3XmJ0IWD7UkC77xy');
 INSERT IGNORE INTO user (email, password) VALUES ('user@example.com', '$2a$10$aU6rN3w8YpUqHuFJgTRM8uJt1D1L8b8ZyPU8zGBK6mZxH3XwAqk6a');
 
 -- 유저-권한 매핑 (user_roles)
