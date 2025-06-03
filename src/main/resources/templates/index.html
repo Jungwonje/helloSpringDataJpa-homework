@@ -13,7 +13,13 @@
     <div style="text-align:center;">
         <p th:if="${loginSuccessMsg}" th:text="${loginSuccessMsg}" style="color:green; font-weight:bold; font-size:1.3em; margin-top:30px;"></p>
     </div>
-    <h1 class="mt-5">Product List</h1>
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h1 class="mt-5">Product List</h1>
+        <!-- 관리자만 전체 사용자 목록 버튼 보임 -->
+        <div sec:authorize="hasRole('ADMIN')">
+            <a class="btn btn-warning" th:href="@{/admin/users}" style="margin-bottom:10px;">전체 사용자 목록</a>
+        </div>
+    </div>
     <!-- 관리자(ROLE_ADMIN)만 'Create New Product' 버튼 보임 -->
     <div sec:authorize="hasRole('ADMIN')">
         <a class="btn btn-primary mb-3" th:href="@{/products/new}">Create New Product</a>
@@ -47,9 +53,14 @@
         </tr>
         </tbody>
     </table>
+    <!-- 로그아웃 버튼: 하단 오른쪽 - form 태그로 POST 요청 -->
+    <div style="text-align:right; margin-top:20px;">
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-danger">로그아웃</button>
+        </form>
+    </div>
 </div>
 
-<!-- Bootstrap JS fragment 삽입 -->
 <div th:insert="~{common :: commonScript}"></div>
 </body>
 </html>

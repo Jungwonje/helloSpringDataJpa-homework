@@ -55,7 +55,6 @@ public class ProductController {
     @PostMapping("/save")
     public String saveProduct(@ModelAttribute("product") @Valid Product product, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            // 신규 상품과 수정 상품 구분 (id가 null이면 신규)
             return (product.getId() == null) ? "new_product" : "edit_product";
         }
         service.save(product);
